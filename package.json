@@ -1,13 +1,14 @@
 {
-  "name": "zevorus",
+  "name": "zevorus-fullstack",
   "version": "1.0.0",
+  "description": "Sitio web de Zevorus con backend Express y base de datos SQLite",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "sqlite3": "^5.1.6",
-    "body-parser": "^1.20.2"
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.2",
+    "sqlite3": "^5.1.7"
   }
 }

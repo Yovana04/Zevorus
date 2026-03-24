@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZEVORUS | Eventos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel: rgba(255,255,255,.04);
+      --border: rgba(255,255,255,.12);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --brand:#C9b27e;
+      --brand2:#2ea6ff;
+      --radius:16px;
+      --max:1120px;
+      --shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(46,166,255,.18), transparent 55%),
+        radial-gradient(900px 500px at 90% 10%, rgba(212,169,58,.16), transparent 60%),
+        var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 20px}
+
+    .nav{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.72);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{
+      display:flex;align-items:center;justify-content:space-between;height:72px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em;
+    }
+    .brand-dot{
+      width:10px;height:10px;border-radius:50%;
+      background:var(--brand);
+      box-shadow:0 0 0 6px rgba(212,169,58,.12);
+    }
+    .menu{display:flex;gap:22px;font-weight:600;color:var(--muted)}
+    .menu a:hover{color:var(--text)}
+    .nav-cta{display:flex;gap:10px;align-items:center}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 16px;border-radius:999px;
+      border:1px solid var(--border);
+      background:transparent;color:var(--text);font-weight:800;
+      transition: transform .12s ease, opacity .12s ease;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); opacity:.95}
+    .btn-primary{
+      background: linear-gradient(180deg, #C9b27e(212,169,58,1), #C9b27e(176,132,32,1));
+      border-color: transparent;
+      color:#0b1220;
+    }
+
+    .hero{padding:70px 0 28px}
+    .hero-wrap{
+      border:1px solid var(--border);
+      background: linear-gradient(135deg, rgba(46,166,255,.14), rgba(212,169,58,.10));
+      border-radius: calc(var(--radius) + 8px);
+      padding:28px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-wrap:before{
+      content:"";
+      position:absolute; inset:-40px;
+      background:
+        radial-gradient(420px 220px at 15% 20%, rgba(46,166,255,.16), transparent 60%),
+        radial-gradient(520px 260px at 85% 15%, rgba(212,169,58,.14), transparent 62%);
+      pointer-events:none;
+    }
+    .hero-grid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:22px;
+      align-items:center;
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      color: var(--brand);font-weight:900;letter-spacing:.2em;font-size:12px;
+    }
+    h1{
+      margin:12px 0 10px;
+      font-size:44px; line-height:1.05; letter-spacing:-.02em;
+    }
+    .lead{
+      margin:0;
+      color:var(--muted);
+      max-width:75ch;
+      line-height:1.65;
+      font-size:16px;
+    }
+    .hero-actions{
+      margin-top:16px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+
+    .next{
+      position:relative;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(11,18,32,.34);
+      border-radius: 18px;
+      padding:18px;
+    }
+    .next .tag{
+      display:inline-flex;gap:8px;align-items:center;
+      font-weight:900;font-size:11px;letter-spacing:.14em;
+      color:#0b1220;background: linear-gradient(180deg, #C9b27e(212,169,58,1), #C9b27e(176,132,32,1));
+      padding:8px 10px;border-radius:999px;
+    }
+    .next h2{
+      margin:12px 0 8px;
+      font-size:18px;
+    }
+    .next p{margin:0;color:var(--muted);line-height:1.6;font-size:13px}
+
+    .meta{
+      margin-top:12px;
+      display:flex;flex-wrap:wrap;gap:8px;
+    }
+    .badge{
+      font-size:11px;font-weight:800;color:rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(11,18,32,.28);
+      padding:8px 10px;border-radius:999px;
+    }
+
+    section{padding:44px 0}
+    .section-title{font-size:28px;margin:0 0 8px;letter-spacing:-.01em}
+    .section-sub{margin:0 0 18px;color:var(--muted);line-height:1.65;max-width:90ch}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      border-radius: calc(var(--radius) + 4px);
+      padding:18px;
+      transition: transform .14s ease, box-shadow .14s ease, background .14s ease;
+    }
+    .card:hover{
+      transform: translateY(-3px);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 16px 34px rgba(0,0,0,.28);
+    }
+    .datebox{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      margin-bottom:10px;
+    }
+    .day{
+      width:54px;height:54px;border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(46,166,255,.14), rgba(212,169,58,.12));
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      font-weight:900;
+    }
+    .day small{font-weight:900;font-size:11px;letter-spacing:.12em;color:rgba(255,255,255,.78)}
+    .day b{font-size:18px}
+    .card h3{margin:0;font-size:16px;line-height:1.25}
+    .card p{margin:10px 0 0;color:var(--muted);line-height:1.6;font-size:13px}
+
+    details{
+      margin-top:12px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top:12px;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:800;
+      color: rgba(255,255,255,.86);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      user-select:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    .chev{
+      width:26px;height:26px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      display:flex;align-items:center;justify-content:center;
+      color: rgba(255,255,255,.78);
+      transition: transform .12s ease;
+      flex:0 0 auto;
+    }
+    details[open] .chev{transform: rotate(180deg)}
+    .list{
+      margin:10px 0 0;
+      color: var(--muted);
+      line-height:1.7;
+      font-size:13px;
+      padding-left:18px;
+    }
+
+    /* CTA */
+    .cta{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background: linear-gradient(135deg, rgba(46,166,255,.16), rgba(212,169,58,.12));
+      border-radius: calc(var(--radius) + 8px);
+      padding:24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      box-shadow: var(--shadow);
+    }
+    .cta h2{margin:0;font-size:24px}
+    .cta p{margin:6px 0 0;color:var(--muted);line-height:1.6;max-width:85ch}
+
+    /* Registration */
+    .reg{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      border-radius: calc(var(--radius) + 8px);
+      padding:20px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+      align-items:start;
+    }
+    .reg p{margin:0;color:var(--muted);line-height:1.65}
+    .form{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(11,18,32,.30);
+      border-radius: 16px;
+      padding:16px;
+    }
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    label{display:block;font-weight:800;font-size:12px;color:rgba(255,255,255,.78);margin-bottom:6px}
+    input,select{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(11,18,32,.35);
+      color: var(--text);
+      outline:none;
+    }
+    .form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
+    .helper{color:var(--muted);font-size:12px}
+
+    footer{
+      padding:30px 0;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      margin-top:44px;
+    }
+
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      h1{font-size:36px}
+      .grid{grid-template-columns:1fr 1fr}
+      .reg{grid-template-columns:1fr}
+      .form-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:560px){
+      .menu{display:none}
+      .grid{grid-template-columns:1fr}
+      .hero-wrap{padding:20px}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-dot"></span>
+        <span>ZEVORUS</span>
+      </a>
+
+      <nav class="menu">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="eventos.html">Eventos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="btn" href="#agenda">Ver agenda</a>
+        <a class="btn btn-primary" href="#registro">Registrarme</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="pill">EVENTOS</div>
+            <h1>Agenda de sesiones, workshops y simulaciones</h1>
+            <p class="lead">
+              Espacios prácticos para equipos de TI y seguridad: tendencias, escenarios reales y
+              herramientas para operar SecOps con métricas.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#registro" onclick="setEvento('EBC (Próximo)')">Registro rápido</a>
+              <a class="btn" href="#agenda">Explorar agenda</a>
+            </div>
+          </div>
+
+          <aside class="next" aria-label="Próximo evento destacado">
+            <span class="tag">PRÓXIMO EVENTO</span>
+            <h2>EBC</h2>
+            <p>
+              Executive Briefing Center (EBC): experiencia intensiva de 3 días diseñada para alinear
+              estrategia, operación SecOps y toma de decisiones ejecutivas.
+            </p>
+
+            <div class="meta">
+              <span class="badge">Duración: 3 días</span>
+              <span class="badge">Horario: 10:00 AM – 8:00 PM</span>
+              <span class="badge">Modalidad: Presencial</span>
+            </div>
+
+            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+              <a class="btn btn-primary" href="#registro" onclick="setEvento('EBC (Próximo)')">Registrarme</a>
+              <a class="btn" href="#agenda">Ver agenda</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="agenda">
+    <div class="container">
+      <h2 class="section-title">Agenda</h2>
+      <p class="section-sub">
+        Selecciona un evento para ver el contenido y registrarte.
+      </p>
+
+      <div class="grid">
+
+        <article class="card">
+          <div class="datebox">
+            <div class="day">
+              <small>PRÓX</small>
+              <b>EBC</b>
+            </div>
+            <span class="badge">3 días</span>
+          </div>
+          <h3>EBC · Executive Briefing Center</h3>
+          <p>
+            Experiencia intensiva de 3 días (10:00 AM – 8:00 PM) para alinear estrategia,
+            operación SecOps y resultados medibles.
+          </p>
+
+          <details>
+            <summary>Contenido del EBC <span class="chev">⌄</span></summary>
+            <ul class="list">
+              <li><strong>Día 1:</strong> Estrategia, riesgos y alineación ejecutiva (KPIs, cobertura y roadmap).</li>
+              <li><strong>Día 2:</strong> Operación SecOps en profundidad (detección, tuning, automatización SOAR).</li>
+              <li><strong>Día 3:</strong> Simulación práctica y plan de mejora continua con métricas.</li>
+            </ul>
+          </details>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn btn-primary" href="#registro" onclick="setEvento('EBC (Próximo)')">Registrarme</a>
+            <a class="btn" href="contacto.html">Solicitar info</a>
+          </div>
+        </article>
+
+        <!-- 17: Geopolítica y Ciberresiliencia -->
+        <article class="card">
+          <div class="datebox">
+            <div class="day">
+              <small>DÍA</small>
+              <b>17</b>
+            </div>
+            <span class="badge">Talk</span>
+          </div>
+          <h3>Geopolítica y Ciberresiliencia</h3>
+          <p>Cómo el contexto global impacta amenazas, continuidad operativa y decisiones de seguridad.</p>
+
+          <details>
+            <summary>Contenido <span class="chev">⌄</span></summary>
+            <ul class="list">
+              <li>Tendencias geopolíticas y amenazas emergentes</li>
+              <li>Riesgo de terceros, cadena de suministro y cloud</li>
+              <li>Recomendaciones de resiliencia (BCP/DR)</li>
+              <li>KPIs ejecutivos para dirección</li>
+            </ul>
+          </details>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn btn-primary" href="#registro" onclick="setEvento('Día 17: Geopolítica y Ciberresiliencia')">Registrarme</a>
+            <a class="btn" href="contacto.html">Solicitar info</a>
+          </div>
+        </article>
+
+        <!-- 18: Simulación IR -->
+        <article class="card">
+          <div class="datebox">
+            <div class="day">
+              <small>DÍA</small>
+              <b>18</b>
+            </div>
+            <span class="badge">Simulación</span>
+          </div>
+          <h3>Simulación de Respuesta a Incidentes en Tiempo Real</h3>
+          <p>Ejercicio práctico: detección, triage, contención y comunicación bajo presión.</p>
+
+          <details>
+            <summary>Contenido <span class="chev">⌄</span></summary>
+            <ul class="list">
+              <li>Escenario realista + roles y responsabilidades</li>
+              <li>Triage, priorización y decisiones de contención</li>
+              <li>Comunicación interna y con stakeholders</li>
+              <li>Lecciones aprendidas + plan de mejora</li>
+            </ul>
+          </details>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn btn-primary" href="#registro" onclick="setEvento('Día 18: Simulación IR en Tiempo Real')">Registrarme</a>
+            <a class="btn" href="contacto.html">Solicitar info</a>
+          </div>
+        </article>
+
+        <!-- 20: Justificar inversión -->
+        <article class="card">
+          <div class="datebox">
+            <div class="day">
+              <small>DÍA</small>
+              <b>20</b>
+            </div>
+            <span class="badge">Ejecutivo</span>
+          </div>
+          <h3>Cómo justificar la inversión ante el board</h3>
+          <p>Framework para construir el caso de negocio: riesgo, costo, impacto y retorno.</p>
+
+          <details>
+            <summary>Contenido <span class="chev">⌄</span></summary>
+            <ul class="list">
+              <li>Lenguaje del board: riesgo, continuidad y reputación</li>
+              <li>KPIs: MTTD/MTTR, exposición y reducción de impacto</li>
+              <li>Modelos de costo y escenarios (what-if)</li>
+              <li>Cómo presentar el roadmap por fases</li>
+            </ul>
+          </details>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn btn-primary" href="#registro" onclick="setEvento('Día 20: Justificar inversión ante el board')">Registrarme</a>
+            <a class="btn" href="contacto.html">Solicitar info</a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="cta">
+        <div>
+          <h2>¿Quieres un evento privado para tu empresa?</h2>
+          <p>Podemos adaptar contenido, nivel técnico y formato (presencial/virtual) con casos de uso de tu industria.</p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn" href="contacto.html">Solicitar propuesta</a>
+          <a class="btn btn-primary" href="#registro" onclick="setEvento('Evento privado (a medida)')">Agendar</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- REGISTRO -->
+  <section id="registro">
+    <div class="container">
+      <h2 class="section-title">Registro</h2>
+      <p class="section-sub">Completa tus datos y selecciona el evento. (Luego lo conectas a tu backend/BD.)</p>
+
+      <div class="reg">
+        <div>
+          <h3 style="margin:0 0 10px">Registro rápido a eventos</h3>
+          <p>
+            Recibirás confirmación y detalles de modalidad, agenda y requisitos. Si el evento es privado,
+            te contactamos para alinear objetivos.
+          </p>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="contacto.html">Contacto general</a>
+            <a class="btn btn-primary" href="contacto.html">Agendar demo</a>
+          </div>
+        </div>
+
+        <div class="form">
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-grid">
+              <div>
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" required placeholder="Tu nombre completo">
+              </div>
+              <div>
+                <label for="empresa">Empresa</label>
+                <input id="empresa" name="empresa" required placeholder="Empresa">
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" required type="email" placeholder="correo@empresa.com">
+              </div>
+              <div>
+                <label for="telefono">Teléfono (opcional)</label>
+                <input id="telefono" name="telefono" placeholder="+52 ...">
+              </div>
+              <div style="grid-column:1 / -1">
+                <label for="evento">Evento</label>
+                <select id="evento" name="evento" required>
+                  <option value="">Selecciona un evento</option>
+                  <option>EBC (Próximo)</option>
+                  <option>Día 17: Geopolítica y Ciberresiliencia</option>
+                  <option>Día 18: Simulación IR en Tiempo Real</option>
+                  <option>Día 20: Justificar inversión ante el board</option>
+                  <option>Evento privado (a medida)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Enviar registro</button>
+              <span class="helper">No compartimos tus datos. Solo seguimiento del evento.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© 2026 ZEVORUS · Eventos</div>
+  </footer>
+
+  <script>
+    function setEvento(value){
+      const evento = document.getElementById("evento");
+      if(!evento) return;
+      const opts = Array.from(evento.options).map(o => o.text);
+      if(opts.includes(value)){
+        evento.value = value;
+      }
+      const el = document.getElementById("registro");
+      if(el) el.scrollIntoView({behavior:"smooth"});
+    }
+
+    function handleSubmit(e){
+      e.preventDefault();
+      alert("¡Registro enviado! (demo) Luego puedes conectarlo a tu backend/BD.");
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
